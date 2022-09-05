@@ -1,3 +1,4 @@
-http://example.com/2022/09/05/post-title/
+http://example.com/2022/09/06/aa/
+http://example.com/ZhouYuanlong/index.html
 http://example.com/2022/09/05/hello-world/
 http://example.com/
