@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-06T03:28:01.106Z</updated>
+  <updated>2022-09-06T04:38:21.515Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,14 +21,15 @@
     <link href="http://example.com/2022/09/06/aa/"/>
     <id>http://example.com/2022/09/06/aa/</id>
     <published>2022-09-05T16:07:53.000Z</published>
-    <updated>2022-09-06T03:28:01.106Z</updated>
+    <updated>2022-09-06T04:38:21.515Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="About-me"><a href="#About-me" class="headerlink" title="About me"></a>About me</h1><p><strong>Hi! I’m  Zhou Yuanlong, a  bachelor student of Sichuan University, Chengdu, Sichuan, P.R. China.</strong></p><h3 id="I-am"><a href="#I-am" class="headerlink" title="I am"></a>I am</h3><ul><li>an interested researcher and developer in the field of Computer Science, also a     game enthusiast and designer, with productions related to Computer   Graphics &amp; Game Science.</li><li>a self-motivated &amp; process-oriented learner, who is willing to contribute to promoting scientific  and technological progress, with highly academic rigor and achievement.</li><li>a student who not only has excellent academic performance, but also achieved in projects, with a number of prizes and copyrights awarded, which generate practical application value and economic benefits.</li></ul><p><strong>Specialization</strong>:  Programming, Computer Graphics, Game Science, AI, etc.<br><strong>Address</strong>:  Jiang’an Campus, Sichuan University, Shuangliu Chengdu, Sichuan Province, PRC<br><strong>Tel</strong>: +86 18280479081<br><strong>E-mail</strong>: <a href="mailto:&#82;&#x79;&#97;&#x6e;&#x62;&#111;&#x77;&#90;&#x40;&#111;&#x75;&#x74;&#x6c;&#x6f;&#x6f;&#107;&#x2e;&#99;&#111;&#109;">&#82;&#x79;&#97;&#x6e;&#x62;&#111;&#x77;&#90;&#x40;&#111;&#x75;&#x74;&#x6c;&#x6f;&#x6f;&#107;&#x2e;&#99;&#111;&#109;</a> </p><p>If you want to learn more about me, you can either jump to another page by top menu or read my detailed CV in sidebar.</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="About-me"><a href="#About-me" class="headerlink" title="About me"></a>About me</h1><hr><h3 id="Hello-I’m-Zhou-Yuanlong"><a href="#Hello-I’m-Zhou-Yuanlong" class="headerlink" title="Hello, I’m  Zhou Yuanlong,"></a>Hello, I’m  <strong>Zhou Yuanlong</strong>,</h3><p>a  bachelor of <strong>Computer Science &amp; Finance</strong> in <strong>Sichuan University</strong>, Chengdu, Sichuan, P.R. China.</p><h3 id="I-am"><a href="#I-am" class="headerlink" title="I am"></a>I am</h3><ul><li>an interested researcher and developer in the field of Computer Science, also a     game enthusiast and designer, with productions related to Computer   Graphics &amp; Game Science.</li><li>a self-motivated &amp; process-oriented learner, who is willing to contribute to promoting scientific  and technological progress, with highly academic rigor and achievement.</li><li>a student who not only has excellent academic performance, but also achieved in projects, with a number of prizes and copyrights awarded, which generate practical application value and economic benefits.<p v-html="'&nbsp;'">&nbsp;</p></li></ul><p><strong>Education</strong>: Bachelor of Sichuan University (2019-2023)<br><strong>Major</strong>: Computer Science &amp; Finance<br><strong>GPA</strong>: 3.78&#x2F;4.0 <strong>Average Score</strong>: 89.4&#x2F;100</p><p><strong>Specialization</strong>:  Programming, Computer Graphics, Game Science, AI, etc.<br><strong>Address</strong>:  Jiang’an Campus, Sichuan University, Shuangliu Chengdu, Sichuan Province, PRC<br><strong>Tel</strong>: +86 18280479081<br><strong>E-mail</strong>: <a href="mailto:&#82;&#x79;&#x61;&#x6e;&#x62;&#x6f;&#x77;&#90;&#64;&#x6f;&#x75;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#99;&#x6f;&#x6d;">&#82;&#x79;&#x61;&#x6e;&#x62;&#x6f;&#x77;&#90;&#64;&#x6f;&#x75;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#46;&#99;&#x6f;&#x6d;</a> </p><p>If you want to learn more about me, you can either jump to other pages by top menu or read my detailed CV in sidebar.</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;About-me&quot;&gt;&lt;a href=&quot;#About-me&quot; class=&quot;headerlink&quot; title=&quot;About me&quot;&gt;&lt;/a&gt;About me&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Hi! I’m  Zhou Yuanlong, a  bachelor st</summary>
+    <summary type="html">&lt;h1 id=&quot;About-me&quot;&gt;&lt;a href=&quot;#About-me&quot; class=&quot;headerlink&quot; title=&quot;About me&quot;&gt;&lt;/a&gt;About me&lt;/h1&gt;&lt;hr&gt;
+&lt;h3 id=&quot;Hello-I’m-Zhou-Yuanlong&quot;&gt;&lt;a href=&quot;#H</summary>
       
     
     

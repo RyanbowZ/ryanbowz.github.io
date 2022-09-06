@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/exps/index.html</loc>
+    <loc>http://example.com/2022/09/06/aa/</loc>
     
     <lastmod>2022-09-06</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2022/09/06/aa/</loc>
+    <loc>http://example.com/works/index.html</loc>
     
     <lastmod>2022-09-06</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/works/index.html</loc>
+    <loc>http://example.com/exps/index.html</loc>
     
     <lastmod>2022-09-06</lastmod>
     
