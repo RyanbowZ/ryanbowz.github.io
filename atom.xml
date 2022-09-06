@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Ryan Website</title>
   
   
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-05T16:08:37.700Z</updated>
+  <updated>2022-09-06T03:28:01.106Z</updated>
   <id>http://example.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>Zhou Yuanlong</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>aa</title>
+    <title>about</title>
     <link href="http://example.com/2022/09/06/aa/"/>
     <id>http://example.com/2022/09/06/aa/</id>
     <published>2022-09-05T16:07:53.000Z</published>
-    <updated>2022-09-05T16:08:37.700Z</updated>
+    <updated>2022-09-06T03:28:01.106Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="ssss"><a href="#ssss" class="headerlink" title="ssss"></a>ssss</h3>]]></content>
+    <content type="html"><![CDATA[<h1 id="About-me"><a href="#About-me" class="headerlink" title="About me"></a>About me</h1><p><strong>Hi! I’m  Zhou Yuanlong, a  bachelor student of Sichuan University, Chengdu, Sichuan, P.R. China.</strong></p><h3 id="I-am"><a href="#I-am" class="headerlink" title="I am"></a>I am</h3><ul><li>an interested researcher and developer in the field of Computer Science, also a     game enthusiast and designer, with productions related to Computer   Graphics &amp; Game Science.</li><li>a self-motivated &amp; process-oriented learner, who is willing to contribute to promoting scientific  and technological progress, with highly academic rigor and achievement.</li><li>a student who not only has excellent academic performance, but also achieved in projects, with a number of prizes and copyrights awarded, which generate practical application value and economic benefits.</li></ul><p><strong>Specialization</strong>:  Programming, Computer Graphics, Game Science, AI, etc.<br><strong>Address</strong>:  Jiang’an Campus, Sichuan University, Shuangliu Chengdu, Sichuan Province, PRC<br><strong>Tel</strong>: +86 18280479081<br><strong>E-mail</strong>: <a href="mailto:&#82;&#x79;&#97;&#x6e;&#x62;&#111;&#x77;&#90;&#x40;&#111;&#x75;&#x74;&#x6c;&#x6f;&#x6f;&#107;&#x2e;&#99;&#111;&#109;">&#82;&#x79;&#97;&#x6e;&#x62;&#111;&#x77;&#90;&#x40;&#111;&#x75;&#x74;&#x6c;&#x6f;&#x6f;&#107;&#x2e;&#99;&#111;&#109;</a> </p><p>If you want to learn more about me, you can either jump to another page by top menu or read my detailed CV in sidebar.</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h3 id=&quot;ssss&quot;&gt;&lt;a href=&quot;#ssss&quot; class=&quot;headerlink&quot; title=&quot;ssss&quot;&gt;&lt;/a&gt;ssss&lt;/h3&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;About-me&quot;&gt;&lt;a href=&quot;#About-me&quot; class=&quot;headerlink&quot; title=&quot;About me&quot;&gt;&lt;/a&gt;About me&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Hi! I’m  Zhou Yuanlong, a  bachelor st</summary>
       
     
     
