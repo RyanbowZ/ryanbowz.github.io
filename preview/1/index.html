@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html style="background-color: rgba(188,190,192,1.0);">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--meta http-equiv="Content-Type" content="text/html;charset=utf-8"-->
+    <title>计算机图形学:网格建模和漫游</title>
+    <style type="text/css">
+        body{
+            margin: 5px;
+            width: calc(100vw - 10px);
+            height: calc(100vh - 60px);
+        }
+    </style>
+    
+	<script type="text/javascript" src="./Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="./Common/initShaders.js"></script>
+    <script type="text/javascript" src="./Common/MV.js"></script>
+	<script type="text/javascript" src="./Models.js"></script>
+	<script type="text/javascript" src="./cubleMap_skybox.js"></script>
+    
+	<script id="vertex-shader" type="x-shader/x-vertex">
+	    //-------------------------------------------------------------------
+		varying vec3 R;//反射向量,需要计算出来传递给片元着色器
+		varying vec3 eye;//用来在片元计算中区分 盒子还是中间物体	
+		
+		varying vec3 N, L, V;   //增加需要传递到片元着色器的变量
+		varying vec4 fColor; //将顶点属性颜色vColor传递到片元着色器和光照计算色作混合
+		uniform vec4 lightPosition; //光源位置
+		uniform mat4 u_NormalMatrix; //MV的转置的逆矩阵
+		attribute vec4 vNormal;     //为作光照计算，从JS传递过来的顶点属性参数：顶点法向量	
+		varying float v_Dist;//用于计算雾化效果时引入的距离参数
+		
+	    //attribute每顶点各用的属性，IN variable
+		attribute  vec4 vPosition; //顶点位置
+        attribute  vec4 vColor;//顶点颜色，有传递进来但是绘制时不用它，控制台会报错		
+			
+		
+		//uniform所用顶点公用的数据 ,IN variable
+        uniform int u_flag;//画坐标还是画图的标志
+		uniform mat4 u_ModelMatrix;//u_CompositeMatrix;//模型变换矩阵
+		uniform mat4 u_ViewMatrix;
+		uniform mat4 u_ProjectionMatrix;	
+		uniform vec4 u_radius;	
+		
+		mat4 MVP=mat4(
+					1.0,    0.0,  	0.0, 	0.0,
+					0.0,  	1.0,  	0.0, 	0.0,
+					0.0,  	0.0,  	1.0, 	0.0,
+				    0.0,    0.0,    0.0,    1.0 
+					);	
+		
+
+        void main() { 
+		vec3 pos,poss;		
+
+		if(u_flag==0){//画天空盒	
+            //不受相机的平移影响
+		    gl_Position=u_ProjectionMatrix * u_ViewMatrix *u_ModelMatrix * vPosition ;//图形位置							
+			//计算得到WC下的向量L,N,V
+			pos = vPosition.xyz;
+			N=normalize(vNormal.xyz);
+			V =-normalize(pos);
+			R=normalize(pos);
+			v_Dist = gl_Position.w;
+			fColor=vColor;				
+		};
+		
+		if(u_flag==1){//画中间物体
+            gl_Position=u_ProjectionMatrix * u_ViewMatrix *u_ModelMatrix * vPosition ;//图形位置							
+			//计算得到WC下的向量L,N,V
+			pos = vPosition.xyz;
+			N=normalize(vNormal.xyz);
+			V =-normalize(pos);
+			R=normalize(pos);
+			v_Dist = gl_Position.w;
+			fColor=vColor;		
+		};			
+		poss=vec3(0.3*pos[0],0.3*pos[1],0.3*pos[2]);
+		//光源并没有随着物体作模型变换,
+		if(lightPosition.w == 0.0) 	
+			L = normalize((lightPosition).xyz);//w=0:远距离光，前三个分量是光源方向
+		else 
+			L = normalize((lightPosition).xyz-pos );//w=1,：点光源，前三个分量是位置	
+		}
+		        
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+		varying vec4 fColor; 
+		uniform vec4 ambientProduct, diffuseProduct, specularProduct;//传递到片元着色器常量
+		uniform float shininess;//常量
+        varying vec3 N, L, V; //E就是gourand里的V,眼睛观察方向单位向量
+		
+		uniform samplerCube texMap;//盒子纹理采样器
+		uniform sampler2D Tex1;
+		varying vec3 R;//反射向量
+		
+		uniform vec3 u_FogColor;
+		uniform vec2 u_FogDist;
+		
+		varying float v_Dist;
+        void main() {
+			    vec4 figurefcolor,skyboxfcolor;    
+				vec3 H = normalize( L + V );
+				vec4 ambient = ambientProduct;
+				float Kd = max( dot(L, N), 0.0 );
+				vec4  diffuse = Kd*diffuseProduct;
+				float Ks = pow( max(dot(N, H), 0.0), shininess );
+				vec4  specular = Ks * specularProduct;				
+				if( dot(L, N) < 0.0 ) specular = vec4(0.0, 0.0, 0.0, 1.0);
+				figurefcolor = ambient + diffuse +specular;
+				figurefcolor.a = 1.0;				
+				
+				skyboxfcolor=textureCube(texMap, R);	//反射映射
+				
+				float fogFactor = clamp((u_FogDist.y - v_Dist)/(u_FogDist.y - u_FogDist.x),0.0, 1.0);
+				vec3 color = mix(vec3(fColor),u_FogColor, fogFactor);
+				vec4 foggColor = vec4(color, fColor.a);	
+				
+				//gl_FragColor=skyboxfcolor;     //只纹理色
+				
+				gl_FragColor=figurefcolor*0.4+skyboxfcolor*0.3+foggColor*0.8; 
+				//纹理色和光照色、雾化的混合
+				
+				//gl_FragColor=figurefcolor;     //只光照色
+				
+				//gl_FragColor=figurefcolor*fColor;	//无纹理，光照色和原色混合
+                
+        }
+    </script>
+	
+</head>
+<body>
+    <div style="display:flex; justify-content:space-between; line-height:25px; color:black; font-size:1vw;">
+		<text>ZX-Viewpoint close or far</text>
+		<text>&nbsp;&nbsp;WS/AD-Camera rotating (along X / Y axis)</text>			
+	    <text>M/N-Increase / decrease the elevation angle</text>
+		<text>P-Switch projection mode</text> </div>
+		<div style="display:flex; justify-content:space-between; line-height:25px; color:black; font-size:1vw;">		
+		<text>↑/↓-Increase / decrease atomization</text>
+		<text>C-Switch point light / directional light&nbsp;&nbsp;</text>
+		<text>JL/IK-Object scaling (along X / Y / Z axis)</text>
+		<text>Space-Reset All to initial state</text>   		   
+		    
+    </div>
+	<!--div style="display:flex; justify-content:space-between; line-height:25px; color:black; font-size:1vw;">
+		<text>ZX-视点靠近或远离场景中心点</text>
+		<text>WS/AD-相机绕X/Y轴旋转</text>			
+	    <text>M/N-放大/减小透视投影的俯仰角</text>
+		<text>P-切换投影方式</text> </div>
+		<div style="display:flex; justify-content:space-between; line-height:25px; color:black; font-size:1vw;">		
+		<text>↑/↓-增大/缩小雾化距离</text>
+		<text>C-切换点光源/平行光源</text>
+		<text>JL/IK/UO-物体缩放X/Y/Z</text>
+		<text>空格-重置复位</text>   		   
+		    
+    </div-->
+	
+	<canvas id="canvas" crossorigin="anonymous" style="width: 90vmin; height: 90vmin;margin-left: auto; margin-right: auto; display: block;">Oops ... your browser doesn't support the HTML5 canvas element</canvas>
+
+    <!--input id="fileBtn" type="file" accept="image/*" onchange="useTexture(this)" style="display: none;"/-->
+</body>
+</html>
