@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html style="background-color: rgba(188,190,192,1.0);">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>计算机图形学:cube3D_MV</title>
+    <style type="text/css">
+        body{
+            margin: 5px;
+            width: calc(100vw - 10px);
+            height: calc(100vh - 40px);
+        }
+    </style>
+    
+	<script id="vertex-shader" type="x-shader/x-vertex">
+	    //attribute每顶点各用的属性，IN variable
+		attribute  vec4 vPosition; //顶点位置
+        attribute  vec4 vColor;//顶点颜色
+	
+		//uniform所用顶点公用的数据 ,IN variable
+        uniform int u_flag;//画坐标还是画图的标志
+		uniform mat4 u_ModelMatrix;//u_CompositeMatrix;//模型变换矩阵
+		uniform mat4 u_ViewMatrix;
+		uniform mat4 u_ProjectionMatrix;
+		
+		//varying传递下去的变量， OUT varible
+		varying vec4 fColor;	
+		
+		//记住：着色器里的矩阵是列先序表示的，看起来是原矩阵的转置！Remeber: thse matrices are column-major
+		//MVP初始为单位矩阵
+        mat4 MVP=mat4(
+					1.0,    0.0,  	0.0, 	0.0,
+					0.0,  	1.0,  	0.0, 	0.0,
+					0.0,  	0.0,  	1.0, 	0.0,
+				    0.0,    0.0,    0.0,    1.0 
+					);					
+
+		mat4 InverseZ = mat4( 
+					1.0,    0.0,  	0.0, 	0.0,
+					0.0,  	1.0,  	0.0, 	0.0,
+					0.0,  	0.0,  	-1.0, 	0.0,
+				    0.0,    0.0,    0.0,    1.0 
+					);
+
+        void main() {		    		
+		    //观察变换:Vertex’ = P*V*M * Vertex //记住：以列向量表示图形，矩阵操作顺序是“左乘”			
+            if(u_flag==1){			
+			        MVP=u_ViewMatrix*u_ModelMatrix;//绘制图形，默认P为单位阵
+            }
+			else
+			{
+			        MVP=u_ViewMatrix; //绘制坐标 默认P为单位阵
+			}
+			
+			//gl_Position通过MVP作用于初始图形顶点坐标，可得到规范化裁剪坐标(左手坐标系)
+			//记住：webGL的CC是左手坐标系，所以简化做法是在变换的最后对Z进行反向变换
+			gl_Position= InverseZ * MVP * vPosition;	  
+			
+			//传递顶点颜色给后续的光栅化算法，那时会插值计算片元颜色
+			fColor=vColor;
+        }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+		varying vec4 fColor;
+		
+        void main() {
+		    //这里的fcolor是根据顶点颜色，光栅化插值后得到的每片元原色
+            gl_FragColor = fColor; 
+        }
+    </script>
+	
+    <script type="text/javascript" src="./Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="./Common/initShaders.js"></script>
+    <script type="text/javascript" src="./Common/MV.js"></script>
+    <script type="text/javascript" src="./cube3D_MV.js"></script>
+</head>
+<body>
+    <div style="display:flex; justify-content:space-between; line-height:20px; color:black; font-size:1vw;">
+        <text>JL/IK/UO-物体缩放X/Y/Z</text>
+		<text>AD/WS-相机绕X/Y轴旋转</text>
+		<text>P-切换投影方式</text>
+        <text>空格-重置复位</text>        
+    </div>
+	<canvas id="canvas">Oops ... your browser doesn't support the HTML5 canvas element</canvas>
+    
+    <!--input id="fileBtn" type="file" accept="image/*" onchange="useTexture(this)" style="display: none;"/-->
+</body>
+</html>
