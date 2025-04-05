@@ -1,7 +1,7 @@
+http://example.com/awards/index.html
+http://example.com/2022/09/06/aa/
 http://example.com/works/index.html
 http://example.com/research/index.html
-http://example.com/2022/09/06/aa/
-http://example.com/awards/index.html
 http://example.com/exps/index.html
 http://example.com/billiards/index.html
 http://example.com/2022/09/05/hello-world/
